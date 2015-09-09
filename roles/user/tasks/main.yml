@@ -1,0 +1,29 @@
+---
+
+- name: include os specific variables
+  include_vars: '{{ ansible_os_family }}.yml'
+
+- name: create user
+  user:
+    name: '{{ username }}'
+    comment: '{{ fullname }}'
+    groups: '{{ user_groups }}'
+    home: '{{ user_home_prefix }}/{{ username }}'
+    shell: '{{ user_shell }}'
+    password: '{{ crypt_password }}'
+    append: yes
+
+- name: 'enable sudo with no password for {{ admin_users_sudo_group }} group'
+  template:
+    src: etc/sudoers.d/sudo_nopasswd.j2
+    dest: /etc/sudoers.d/sudo_nopasswd
+    mode: 0440
+    owner: root
+    group: root
+  when: admin_users_sudo_nopasswd|bool
+
+- name: disable sudo with no password
+  file:
+    path: /etc/sudoers.d/sudo_nopasswd
+    state: absent
+  when: not admin_users_sudo_nopasswd|bool

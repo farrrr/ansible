@@ -1,0 +1,26 @@
+---
+- name: install tzdata if it is necessary
+  apt: name=tzdata state=present
+  tags: [ common, timezone ]
+
+- name: set /etc/timezone
+  template:
+    src: etc/timezone.j2
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
+  notify: update tzdata
+  tags: [ common, timezone ]
+
+- name: set /etc/localtime
+  file:
+    src: /usr/share/zoneinfo/{{ timezone }}
+    dest: /etc/localtime
+    state: link
+    owner: root
+    group: root
+    mode: 0644
+    force: yes
+  tags: [ common, timezone ]
+

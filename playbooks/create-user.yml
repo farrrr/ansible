@@ -1,0 +1,28 @@
+# vim: ft=ansible:
+---
+- hosts: '{{ inventory }}'
+  remote_user: root
+
+  vars_prompt:
+    - name: "username"
+      prompt: "Username"
+      private: no
+    - name: "fullname"
+      prompt: "Full Name"
+      private: no
+    - name: "user_groups"
+      prompt: "Groups"
+      default: "staff,sudo"
+      private: no
+    - name: "user_shell"
+      prompt: "Shell path"
+      default: "/bin/bash"
+      private: no
+    - name: "crypt_password"
+      prompt: "Password"
+      private: yes
+      encrypt: "sha512_crypt"
+      confirm: yes
+
+  roles:
+    - user

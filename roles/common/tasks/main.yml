@@ -1,0 +1,5 @@
+---
+- include: hosts.yml
+- include: timezone.yml
+- include: sysctl.yml
+- include: software.yml

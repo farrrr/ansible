@@ -1,0 +1,5 @@
+# vim: ft=ansible:
+---
+- hosts: '{{ inventory }}'
+  roles:
+  - common

@@ -1,0 +1,3 @@
+# {{ ansible_managed }}
+# Enable password-less sudo for users in {{ admin_users_sudo_group }} group.
+%{{ admin_users_sudo_group }} ALL=(ALL:ALL) NOPASSWD: ALL

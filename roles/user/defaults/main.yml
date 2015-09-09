@@ -1,0 +1,3 @@
+---
+admin_users_sudo_nopasswd: true
+user_home_prefix: /home

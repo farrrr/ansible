@@ -1,0 +1,10 @@
+---
+- name: configure /etc/sysctl.conf
+  template:
+    src: etc/sysctl.j2
+    dest: /etc/sysctl.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: update sysctl
+  tags: [configration, sysctl]

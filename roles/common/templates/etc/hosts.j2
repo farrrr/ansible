@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+
+127.0.0.1       localhost
+127.0.1.1       {{ hostname }} {{ inventory_hostname_short }}
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+
+{% for host in groups['all'] %}
+{{ hostvars[host].private_address  }} {{ hostvars[host].hostname }} {{ hostvars[host].inventory_hostname_short }}
+{% endfor %}

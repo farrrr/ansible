@@ -1,0 +1,33 @@
+---
+
+- name: 'add software repository - {{ item }}'
+  apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - 'ppa:xespackages/tmux'
+    - 'ppa:brightbox/ruby-ng'
+    - 'ppa:chris-lea/node.js'
+
+- name: 'Install base software - {{ item }}'
+  apt: name={{ item }} state=present
+  with_items:
+    - curl
+    - wget
+    - git
+    - zip
+    - unzip
+    - logrotate
+    - python-pip
+    - python-dev
+    - python-software-properties
+    - build-essential
+    - cmake
+    - htop
+
+- name: 'Install base software - {{ item }}'
+  apt: name={{ item }} state=latest
+  with_items:
+    - tmux
+    - ruby2.2
+    - nodejs
+
